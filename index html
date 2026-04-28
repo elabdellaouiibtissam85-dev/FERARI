@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renault Experience | Passion Rouge</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --renault-red: #e1001a;
+            --dark-overlay: rgba(0, 0, 0, 0.6);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Video Background Section */
+        .hero {
+            position: relative;
+            height: 100vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .video-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Had l-video khdawha men stock bach t-khdem lik f ay blasa */
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--dark-overlay), transparent, var(--dark-overlay));
+            z-index: 0;
+        }
+
+        .content {
+            z-index: 1;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 10px;
+            color: #fff;
+            margin-bottom: 10px;
+        }
+
+        .welcome-text {
+            color: var(--renault-red);
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+        }
+
+        /* Models Grid Layout */
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            width: 90%;
+            max-width: 1200px;
+            z-index: 1;
+        }
+
+        .model-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 30px 20px;
+            border-radius: 5px; /* Renault vibes style */
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            border-bottom: 4px solid transparent;
+        }
+
+        .model-card:hover {
+            transform: scale(1.05);
+            background: rgba(225, 0, 26, 0.2);
+            border-bottom: 4px solid var(--renault-red);
+        }
+
+        .model-card h3 {
+            font-size: 1.2rem;
+            text-transform: uppercase;
+        }
+
+        /* Modal / Information Box */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal-content {
+            background: #fff;
+            color: #000;
+            padding: 50px;
+            border-radius: 0 50px 0 50px;
+            max-width: 600px;
+            width: 90%;
+            position: relative;
+            box-shadow: 0 0 30px var(--renault-red);
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 30px;
+            cursor: pointer;
+            color: var(--renault-red);
+        }
+
+        .modal-content h2 {
+            color: var(--renault-red);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
+        }
+
+        .detail-item {
+            margin: 15px 0;
+            font-size: 1.1rem;
+        }
+
+        .detail-item span {
+            font-weight: bold;
+            color: #555;
+            display: block;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div class="video-container">
+            <div class="overlay"></div>
+            <video autoplay muted loop playsinline>
+                <source src="https://player.vimeo.com/external/459389137.sd.mp4?s=984a4413e002636a0058e39f37d4576f3f009945&profile_id=164&oauth2_token_id=57447761" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="content">
+            <h1>RENAULT</h1>
+            <p class="welcome-text">BIENVENUE CHEZ RENAULT</p>
+        </div>
+
+        <div class="models-grid">
+            <div class="model-card" onclick="openDetails('CLIO', 'Citadine Compacte', 'Avenue Mohammed V, Casablanca', 'clio@renault-morocco.com')">
+                <h3>Clio</h3>
+            </div>
+            <div class="model-card" onclick="openDetails('MEGANE', 'Berline Dynamique', 'Route d\'El Jadida, Casablanca', 'megane@renault-morocco.com')">
+                <h3>Megane</h3>
+            </div>
+            <div class="model-card" onclick="openDetails('ARKANA', 'SUV Coupé Sport', 'Quartier Industriel, Tanger', 'arkana@renault-morocco.com')">
+                <h3>Arkana</h3>
+            </div>
+            <div class="model-card" onclick="openDetails('AUSTRAL', 'SUV Hybride Premium', 'Boulevard Zerktouni, Marrakech', 'austral@renault-morocco.com')">
+                <h3>Austral</h3>
+            </div>
+            <div class="model-card" onclick="openDetails('CAPTUR', 'Crossover Urbain', 'Zone Automobile, Agadir', 'captur@renault-morocco.com')">
+                <h3>Captur</h3>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="infoModal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeDetails()">&times;</span>
+            <h2 id="m-name">Modèle Name</h2>
+            <div class="detail-item"><span>Catégorie</span> <p id="m-type"></p></div>
+            <div class="detail-item"><span>Adresse du Showroom</span> <p id="m-address"></p></div>
+            <div class="detail-item"><span>Contact Email</span> <p id="m-email"></p></div>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('infoModal');
+
+        function openDetails(name, type, addr, mail) {
+            document.getElementById('m-name').innerText = name;
+            document.getElementById('m-type').innerText = type;
+            document.getElementById('m-address').innerText = addr;
+            document.getElementById('m-email').innerText = mail;
+            modal.style.display = 'flex';
+        }
+
+        function closeDetails() {
+            modal.style.display = 'none';
+        }
+
+        // Fermer mli t-cliki kharij l-box
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                closeDetails();
+            }
+        }
+    </script>
+</body>
+</html>
